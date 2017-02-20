@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 export default React.createClass({
   getPair: function() {
@@ -17,6 +18,7 @@ export default React.createClass({
     return <div className="voting">
       {this.getPair().map(entry =>
         <button key={entry}
+                className={classNames({voted: this.hasVotedFor(entry)})}
                 disabled={this.isDisabled()}
                 onClick={() => this.props.vote(entry)}>
 

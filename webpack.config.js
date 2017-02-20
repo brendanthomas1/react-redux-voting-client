@@ -11,6 +11,9 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'react-hot-loader!babel-loader'
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
     }]
   },
   resolve: {
