@@ -7,19 +7,16 @@ import reducer from './reducer';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
+import io from 'socket.io-client';
 
 require('./style.css');
 
 const store = createStore(reducer);
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['No Code', 'Yield'],
-      tally: {Yield: 2}
-    }
-  }
-});
+
+const socket = io(`${location.protocol}//${location.hostname}:8090`);
+socket.on('state', state =>
+  store.dispatch({type: 'SET_STATE', state})
+);
 
 const routes = <Route component={App}>
   <Route path="/results" component={ResultsContainer} />
